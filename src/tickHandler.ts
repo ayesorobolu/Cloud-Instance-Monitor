@@ -33,18 +33,28 @@ export const checkInstances = async (instanceUrls?: string[]) => {
 // Function to send alerts to Telex
 const sendTelexAlert = async (instanceUrl: string, message: string) => {
     const telexWebhook = process.env.TELEX_WEBHOOK_URL;
-    
+
     if (!telexWebhook) {
         console.error("❌ Telex Webhook URL is missing in .env file!");
         return;
     }
 
     try {
-        await axios.post(telexWebhook, {
-            message: `🚨 Alert: ${message} (${instanceUrl})`,
+        const payload = {
+            event_name: "instance_down",  // REQUIRED by Telex API
+            message: message,  // Your alert message
+            status: "down",    // REQUIRED: Telex needs this field
+            username: "Cloud Monitor" // REQUIRED: This must be included
+        };
+
+        console.log("📤 Sending payload to Telex:", JSON.stringify(payload, null, 2));
+
+        const response = await axios.post(telexWebhook, payload, {
+            headers: { "Content-Type": "application/json" },
         });
-        console.log(`✅ Alert sent to Telex for ${instanceUrl}`);
+
+        console.log(`✅ Alert sent to Telex:`, response.data);
     } catch (error) {
-        console.error("❌ Failed to send alert to Telex:", error.message);
+        console.error("❌ Failed to send alert to Telex:", error.response?.data || error.message);
     }
 };
