@@ -8,6 +8,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
+console.log("🔍 TELEX_WEBHOOK_URL:", process.env.TELEX_WEBHOOK_URL || "NOT FOUND!");
 
 app.use(cors());
 app.use(express.json());  // Enable JSON parsing
