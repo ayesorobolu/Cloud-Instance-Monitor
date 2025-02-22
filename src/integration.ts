@@ -8,7 +8,7 @@ export const integrationSpecSettings = {
             "app_description": "Sends alerts to a Telex channel if a cloud instance goes down.",
             "app_logo": "https://cdn-ak.f.st-hatena.com/images/fotolife/b/bst-tech/20211206/20211206113340.png",
             "app_name": "Cloud Instance Monitor",
-            "app_url": "https://your-deployed-url.onrender.com",
+            "app_url": "https://cloud-instance-monitor.onrender.com",
             "background_color": "#ffffff"
         },
         "integration_category": "Monitoring & Logging",
@@ -36,7 +36,7 @@ export const integrationSpecSettings = {
               "default": "* * * * *" 
             }
           ],
-        "tick_url": "https://your-deployed-url.onrender.com/tick",
+        "tick_url": "https://cloud-instance-monitor.onrender.com/tick",
         "target_url": ""
     }
 }
