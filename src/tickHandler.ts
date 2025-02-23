@@ -42,18 +42,18 @@ const sendTelexAlert = async (instanceUrl: string, message: string) => {
     try {
         const payload = {
             event_name: "instance_down",  
-            message: String(message),   // ✅ Ensuring message is a string
+            message: String(message),   
             status: "down",
             username: "Cloud Monitor"
         };
 
-        console.log("📤 Sending payload to Telex:", JSON.stringify(payload, null, 2));
+        console.log("📤 Sending Telex Alert Payload:", JSON.stringify(payload, null, 2));
 
         const response = await axios.post(telexWebhook, payload, {
             headers: { "Content-Type": "application/json" },
         });
 
-        console.log(`✅ Alert sent to Telex:`, response.data);
+        console.log(`✅ Alert sent to Telex, Response:`, response.data);
     } catch (error) {
         console.error("❌ Failed to send alert to Telex:", error.response?.data || error.message);
     }
