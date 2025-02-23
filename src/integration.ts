@@ -6,7 +6,7 @@ export const integrationSpecSettings = {
         },
         "descriptions": {
             "app_description": "Sends alerts to a Telex channel if a cloud instance goes down.",
-            "app_logo": "https://cdn-ak.f.st-hatena.com/images/fotolife/b/bst-tech/20211206/20211206113340.png",
+            "app_logo": "https://img.freepik.com/free-photo/two-clouds-with-camera_1048-1666.jpg?ga=GA1.1.1029648335.1740049750&semt=ais_hybrid",
             "app_name": "Cloud Instance Monitor",
             "app_url": "https://cloud-instance-monitor.onrender.com",
             "background_color": "#ffffff"
