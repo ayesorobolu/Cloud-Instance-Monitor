@@ -5,7 +5,6 @@ dotenv.config();
 
 // Function to check instance health
 export const checkInstances = async (instanceUrls?: string[]) => {
-    // ✅ Use Telex-provided URLs first, fallback to .env
     const urlsToCheck = instanceUrls && instanceUrls.length > 0 
         ? instanceUrls 
         : (process.env.INSTANCE_URLS?.split(",").map(url => url.trim()) || []);
@@ -17,9 +16,11 @@ export const checkInstances = async (instanceUrls?: string[]) => {
             console.log(`🌐 Checking instance: ${url}`);
             const response = await axios.get(url, { timeout: 5000 });
 
+            console.log(`📩 Received response: ${response.status} - ${response.statusText}`);
+
             if (response.status !== 200) {
                 console.log(`❌ Instance down: ${url}`);
-                await sendTelexAlert(url, "Instance is DOWN! Non-200 status code.");
+                await sendTelexAlert(url, `Instance is DOWN! Received status: ${response.status}`);
             } else {
                 console.log(`✅ Instance is UP: ${url}`);
             }
@@ -29,7 +30,6 @@ export const checkInstances = async (instanceUrls?: string[]) => {
         }
     }
 };
-
 // Function to send alerts to Telex
 const sendTelexAlert = async (instanceUrl: string, message: string) => {
     const telexWebhook = process.env.TELEX_WEBHOOK_URL;
