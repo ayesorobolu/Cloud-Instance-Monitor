@@ -41,10 +41,10 @@ const sendTelexAlert = async (instanceUrl: string, message: string) => {
 
     try {
         const payload = {
-            event_name: "instance_down",  // REQUIRED by Telex API
-            message: message,  // Your alert message
-            status: "down",    // REQUIRED: Telex needs this field
-            username: "Cloud Monitor" // REQUIRED: This must be included
+            event_name: "instance_down",  
+            message: String(message),   // ✅ Ensuring message is a string
+            status: "down",
+            username: "Cloud Monitor"
         };
 
         console.log("📤 Sending payload to Telex:", JSON.stringify(payload, null, 2));
